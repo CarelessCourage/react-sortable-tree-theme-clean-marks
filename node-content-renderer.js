@@ -158,14 +158,17 @@ class FileThemeNodeContentRenderer extends Component {
                       </div>
                     ))}
                   </div>
-                  <div className={styles.rowLabel}>
+
+                  <div className={styles.rowLabel} onClick={() => {
+                    console.log("lol: ", parentNode);
+                  }}>
                     <span className={styles.rowTitle}>
                       {typeof nodeTitle === 'function'
                         ? nodeTitle({
-                            node,
-                            path,
-                            treeIndex,
-                          })
+                          node,
+                          path,
+                          treeIndex,
+                        })
                         : nodeTitle}
                     </span>
                   </div>

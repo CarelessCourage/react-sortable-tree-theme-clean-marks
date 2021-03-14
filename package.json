@@ -1,7 +1,7 @@
 {
-  "name": "react-sortable-tree-theme-file-explorer",
+  "name": "react-sortable-tree-theme-clean-marks",
   "version": "2.0.0",
-  "description": "File explorer theme for react-sortable-tree",
+  "description": "Checkmark theme for react-sortable-tree",
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production TARGET=umd webpack --bail",
     "build:demo": "npm run clean:demo && cross-env NODE_ENV=production TARGET=demo webpack --bail",

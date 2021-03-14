@@ -1,3 +1,7 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
 .rowWrapper {
   height: 100%;
   box-sizing: border-box;
@@ -22,7 +26,7 @@
   display: flex;
   position: relative;
 
-  & > * {
+  &>* {
     box-sizing: border-box;
   }
 }
@@ -108,6 +112,7 @@
   @extend %rowItem;
 }
 
+//directory arrow
 .collapseButton,
 .expandButton {
   appearance: none;
@@ -130,7 +135,7 @@
     border: solid transparent 10px;
     border-left-width: 7px;
     border-right-width: 7px;
-    border-top-color: gray;
+    border-top-color: red;
   }
 
   &:hover::after {
@@ -141,8 +146,7 @@
     outline: none;
 
     &::after {
-      filter: drop-shadow(0 0 1px #83bef9) drop-shadow(0 0 1px #83bef9)
-        drop-shadow(0 0 1px #83bef9);
+      filter: drop-shadow(0 0 1px #83bef9) drop-shadow(0 0 1px #83bef9) drop-shadow(0 0 1px #83bef9);
     }
   }
 }
@@ -205,18 +209,22 @@ $highlight-line-size: 6px; // Make it an even number for clean rendering
 
   @keyframes arrow-pulse {
     $base-multiplier: 10;
+
     0% {
       transform: translate(0, 0);
       opacity: 0;
     }
+
     30% {
       transform: translate(0, 30% * $base-multiplier);
       opacity: 1;
     }
+
     70% {
       transform: translate(0, 70% * $base-multiplier);
       opacity: 1;
     }
+
     100% {
       transform: translate(0, 100% * $base-multiplier);
       opacity: 0;
