@@ -1,8 +1,8 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import SortableTree from 'react-sortable-tree';
 import FileExplorerTheme from '../index';
-import style from './app.scss';
 
+import './app.scss';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,45 +12,48 @@ class App extends Component {
       searchFocusIndex: 0,
       searchFoundCount: null,
       treeData: [
-        { title: '.gitignore' },
-        { title: 'package.json' },
         {
           title: 'src',
-          isDirectory: true,
           expanded: true,
+          checked: false,
           children: [
-            { title: 'styles.css' },
-            { title: 'index.js' },
-            { title: 'reducers.js' },
-            { title: 'actions.js' },
-            { title: 'utils.js' },
+            { title: 'styles.css', checked: false },
+            { title: 'index.js', checked: false },
+            { title: 'reducers.js', checked: false },
+            { title: 'actions.js', checked: false },
+            { title: 'utils.js', checked: false },
           ],
         },
         {
           title: 'tmp',
-          isDirectory: true,
+          checked: false,
           children: [
-            { title: '12214124-log' },
-            { title: 'drag-disabled-file', dragDisabled: true },
+            { title: '12214124-log', checked: false },
+            { title: 'drag-disabled-file', checked: false},
           ],
         },
         {
-          title: 'build',
-          isDirectory: true,
-          children: [{ title: 'react-sortable-tree.js' }],
+          title: 'src',
+          checked: false,
+          children: [
+            { title: 'styles.css', checked: false },
+            { title: 'index.js', checked: false },
+            { title: 'reducers.js', checked: false },
+            { title: 'actions.js', checked: false },
+            { title: 'utils.js', checked: false },
+          ],
         },
         {
-          title: 'public',
-          isDirectory: true,
-        },
-        {
-          title: 'node_modules',
-          isDirectory: true,
+          title: 'tmp',
+          checked: false,
+          children: [
+            { title: '12214124-log', checked: false },
+            { title: 'drag-disabled-file', checked: false },
+          ],
         },
       ],
     };
 
-    this.test = this.test.bind(this);
     this.updateTreeData = this.updateTreeData.bind(this);
     this.nodeProps = this.nodeProps.bind(this);
   }
@@ -96,10 +99,6 @@ class App extends Component {
     }
   }
 
-  test() {
-    console.log("test works: ", style);
-  }
-
   render() {
     const {
       treeData,
@@ -108,19 +107,10 @@ class App extends Component {
     } = this.state;
 
     return (
-      <div style={{ height: '100vh' }}>
-
-        <div onClick={this.test}>
-          <svg id="Layer_1" className={style.checkmark + " " + style.empty} data-name="Layer 1" viewBox="0 0 24 24">
-            <circle id="circleBg" className={style.circleBg} cx="12" cy="12" r="12" />
-            <g id="lines" className={style.lines}>
-              <line id="line" className={style.line} x1="11.99" y1="16.74" x2="20.47" y2="8.26" />
-              <line id="line2" className={style.line2} x1="11.99" y1="16.74" x2="3.5" y2="8.26" />
-            </g>
-          </svg>
-        </div>
+      <div>
 
         <SortableTree
+          isVirtualized={false}
           theme={FileExplorerTheme}
           treeData={treeData}
           onChange={this.updateTreeData}
@@ -135,7 +125,7 @@ class App extends Component {
           }
           canDrag={({ node }) => !node.dragDisabled}
           canDrop={({ nextParent }) => !nextParent || nextParent.isDirectory}
-        //generateNodeProps={rowInfo => this.nodeProps(rowInfo)}
+          //generateNodeProps={rowInfo => this.nodeProps(rowInfo)}
         />
       </div>
     );

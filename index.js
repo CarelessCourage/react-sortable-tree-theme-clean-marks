@@ -17,6 +17,6 @@ module.exports = {
   nodeContentRenderer,
   treeNodeRenderer,
   scaffoldBlockPxWidth: 25,
-  rowHeight: 25,
+  rowHeight: 40,
   slideRegionSize: 50,
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './node-content-renderer.scss';
+import ModularIcon from './ModularIcon';
 
 function isDescendant(older, younger) {
   return (
@@ -93,26 +94,21 @@ class FileThemeNodeContentRenderer extends Component {
     });
 
     const nodeContent = (
-      <div style={{ height: '100%' }} {...otherProps}>
+      <div style={{ height: '100%' }} {...otherProps} onClick={() =>
+        toggleChildrenVisibility({
+          node,
+          path,
+          treeIndex,
+        })
+      }>
         {toggleChildrenVisibility &&
           node.children &&
           node.children.length > 0 && (
-            <button
-              type="button"
+            <ModularIcon
               aria-label={node.expanded ? 'Collapse' : 'Expand'}
-              className={
-                node.expanded ? styles.collapseButton : styles.expandButton
-              }
-              style={{
-                left: (lowerSiblingCounts.length - 0.7) * scaffoldBlockPxWidth,
-              }}
-              onClick={() =>
-                toggleChildrenVisibility({
-                  node,
-                  path,
-                  treeIndex,
-                })
-              }
+              expandedClass={node.expanded ? " " : styles.rotate90}
+              class={styles.absolute}
+              style={{left: (lowerSiblingCounts.length - 0.7) * scaffoldBlockPxWidth}}
             />
           )}
 
@@ -149,6 +145,13 @@ class FileThemeNodeContentRenderer extends Component {
                   }
                 >
                   <div className={styles.rowToolbar}>
+                  {!node.children && (
+                    <ModularIcon
+                      aria-label={node.expanded ? 'Collapse' : 'Expand'}
+                      expandedClass={styles.checkmark + " " + (node.checked ? " " : styles.empty)}
+                      onClick={node.checked = !node.checked}
+                    />)}
+
                     {icons.map((icon, index) => (
                       <div
                         key={index} // eslint-disable-line react/no-array-index-key
@@ -159,9 +162,7 @@ class FileThemeNodeContentRenderer extends Component {
                     ))}
                   </div>
 
-                  <div className={styles.rowLabel} onClick={() => {
-                    console.log("lol: ", parentNode);
-                  }}>
+                  <div className={styles.rowLabel}>
                     <span className={styles.rowTitle}>
                       {typeof nodeTitle === 'function'
                         ? nodeTitle({
