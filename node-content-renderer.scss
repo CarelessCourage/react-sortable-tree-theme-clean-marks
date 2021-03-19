@@ -1,12 +1,21 @@
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
   outline: none;
   overflow: visible !important;
+  //font-weight: 100;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 50px;
 }
 
 .node {
   //background-color: red;
   //animation: nodeAppear 1s;
+  $accentColor: #04AA6D;
 }
 
 @keyframes nodeAppear {
@@ -54,7 +63,7 @@ svg {
   .line2, 
   .lines,
   svg {
-    fill: none;
+    //fill: none;
     transition: .2s ease-in-out;
   }
 }
@@ -79,7 +88,7 @@ svg {
 
 .checkmark {
   .circleBg {
-    fill: #45c434;
+    fill: #04AA6D;
   }
 
   .lines {
@@ -162,7 +171,7 @@ svg {
   border-radius: 10em;
 
   &:hover {
-    background-color: red;
+    background-color: rgba(128, 128, 128, 0.24);
   }
 
   &>* {
@@ -183,7 +192,7 @@ svg {
   }
 
   &::before {
-    background-color: lightblue;
+    background-color: #04AA6D;
     //border: 4px dotted black;
     border-radius: 2em;
     content: '';
@@ -203,6 +212,11 @@ svg {
   @extend .rowLandingPad;
 
   &::before {
+    content: "delete";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-color: #e6a8ad;
   }
 }
@@ -234,6 +248,16 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-weight: 100;
+  &.headParent {
+    font-size: 1.1em;
+    //margin-bottom: 10px;
+    //color: #04AA6D;
+    font-weight: 400;
+    &.active {
+      color: #04AA6D;
+    }
+  }
 }
 
 .rowLabel {
@@ -323,7 +347,7 @@ svg {
 
 /* Highlight line for pointing to dragged row destination
    ========================================================================== */
-$highlight-color: #36c2f6;
+$highlight-color: #04AA6D;
 $highlight-line-size: 2px; // Make it an even number for clean rendering
 
 /**

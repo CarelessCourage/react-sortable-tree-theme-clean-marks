@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import SortableTree from 'react-sortable-tree';
 import FileExplorerTheme from '../index';
+import ModularIcon from '../ModularIcon';
+import styles from '../node-content-renderer.scss';
+import Multiselect from 'react-widgets/lib/Multiselect'
+import '../react-widgets.css';
+
 
 import './app.scss';
 class App extends Component {
@@ -13,19 +18,19 @@ class App extends Component {
       searchFoundCount: null,
       treeData: [
         {
-          title: 'src',
+          title: 'General information',
           expanded: true,
           checked: false,
           children: [
-            { title: 'styles.css', checked: false },
-            { title: 'index.js', checked: false },
-            { title: 'reducers.js', checked: false },
-            { title: 'actions.js', checked: false },
-            { title: 'utils.js', checked: false },
+            { title: 'Industry Plant', checked: false },
+            { title: 'Finance', checked: false },
+            { title: 'Law', checked: false },
+            { title: 'Janitor', checked: false },
+            { title: 'Window Cleaner', checked: false },
           ],
         },
         {
-          title: 'tmp',
+          title: 'UX/UI',
           checked: false,
           children: [
             { title: '12214124-log', checked: false },
@@ -33,7 +38,7 @@ class App extends Component {
           ],
         },
         {
-          title: 'src',
+          title: 'Communication',
           checked: false,
           children: [
             { title: 'styles.css', checked: false },
@@ -41,14 +46,6 @@ class App extends Component {
             { title: 'reducers.js', checked: false },
             { title: 'actions.js', checked: false },
             { title: 'utils.js', checked: false },
-          ],
-        },
-        {
-          title: 'tmp',
-          checked: false,
-          children: [
-            { title: '12214124-log', checked: false },
-            { title: 'drag-disabled-file', checked: false },
           ],
         },
       ],
@@ -64,38 +61,20 @@ class App extends Component {
 
   nodeProps(rowInfo) {
     return {
-      icons: rowInfo.node.isDirectory
-        ? [
-          <div
-            style={{
-              borderLeft: 'solid 8px gray',
-              borderBottom: 'solid 10px gray',
-              marginRight: 10,
-              boxSizing: 'border-box',
-              width: 16,
-              height: 12,
-              filter: rowInfo.node.expanded
-                ? 'drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)'
-                : 'none',
-              borderColor: rowInfo.node.expanded ? 'white' : 'gray',
-            }}
-          />,
-        ]
-        : [
-          <div
-            style={{
-              border: 'solid 1px black',
-              fontSize: 8,
-              textAlign: 'center',
-              marginRight: 10,
-              width: 12,
-              height: 16,
-            }}
-          >
-            F
-        </div>,
+      icons: [
+        <ModularIcon
+          aria-label={rowInfo.node.expanded ? 'Collapse' : 'Expand'}
+          expandedClass={
+            (!rowInfo.node.children ?
+            styles.checkmark + " " + (rowInfo.node.checked ? " " : styles.empty) :
+            " lol") + " " +
+            (!rowInfo.node.expanded && rowInfo.node.children ? styles.rotate90 : " ")
+          }
+          onClick={() => rowInfo.node.checked = !rowInfo.node.checked}
+        />,
         ],
       buttons: [],
+      meta: rowInfo,
     }
   }
 
@@ -108,7 +87,12 @@ class App extends Component {
 
     return (
       <div>
-
+        <h1>Topics</h1>
+        <Multiselect
+          data={['orange', 'red', 'blue', 'purple']}
+          defaultValue={["orange", "blue"]}
+          disabled={["red", "purple"]}
+        />
         <SortableTree
           isVirtualized={false}
           theme={FileExplorerTheme}
@@ -124,8 +108,7 @@ class App extends Component {
             })
           }
           canDrag={({ node }) => !node.dragDisabled}
-          canDrop={({ nextParent }) => !nextParent || nextParent.isDirectory}
-          //generateNodeProps={rowInfo => this.nodeProps(rowInfo)}
+          generateNodeProps={rowInfo => this.nodeProps(rowInfo)}
         />
       </div>
     );

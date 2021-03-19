@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './node-content-renderer.scss';
 import ModularIcon from './ModularIcon';
+//import {getNodeAtPath, addNodeUnderParent, removeNodeAtPath }  from 'react-sortable-tree';
 
 function isDescendant(older, younger) {
   return (
@@ -11,6 +12,22 @@ function isDescendant(older, younger) {
       child => child === younger || isDescendant(child, younger)
     )
   );
+}
+
+function hasCheckedChild(node) {
+  var checked = false;
+  var result = false;
+  
+  if(node.children === undefined) {
+    //pass
+  } else {
+    result = node.children.filter(child => child.checked);
+  }
+
+  result.length > 0 ? checked = true : checked = false;
+
+  //checked ? console.log(node.title, ": ", result) : null;
+  return checked;
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -101,17 +118,6 @@ class FileThemeNodeContentRenderer extends Component {
           treeIndex,
         })
       }>
-        {toggleChildrenVisibility &&
-          node.children &&
-          node.children.length > 0 && (
-            <ModularIcon
-              aria-label={node.expanded ? 'Collapse' : 'Expand'}
-              expandedClass={node.expanded ? " " : styles.rotate90}
-              class={styles.absolute}
-              style={{left: (lowerSiblingCounts.length - 0.7) * scaffoldBlockPxWidth}}
-            />
-          )}
-
         <div
           className={
             styles.rowWrapper +
@@ -141,15 +147,18 @@ class FileThemeNodeContentRenderer extends Component {
                 <div
                   className={
                     styles.rowContents +
-                    (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
+                    (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '') + " " +
+                    (parentNode == null ? styles.headParent : "") + " " + 
+                    (hasCheckedChild(node) ? styles.active : "")
                   }
                 >
                   <div className={styles.rowToolbar}>
-                  {!node.children && (
+                  {!node.children && false && (
                     <ModularIcon
                       aria-label={node.expanded ? 'Collapse' : 'Expand'}
                       expandedClass={styles.checkmark + " " + (node.checked ? " " : styles.empty)}
-                      onClick={node.checked = !node.checked}
+                      //onClick={getNodeAtPath(node.path, treeData)}
+                      //onClick={console.log("lol: ", treeData)}
                     />)}
 
                     {icons.map((icon, index) => (

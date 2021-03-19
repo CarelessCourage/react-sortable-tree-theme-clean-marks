@@ -7,11 +7,11 @@ class ModularIcon extends React.Component {
       this.state = {
         isClass: '',
       };
-      this.test = this.test.bind(this);
+      this.testCheckIconChange = this.testCheckIconChange.bind(this);
     }
 
-    test(newoo) {
-      this.setState({ isClass: newoo});
+    testCheckIconChange(newClass) {
+      this.setState({ isClass: newClass});
     }
   
     render() {
@@ -20,12 +20,12 @@ class ModularIcon extends React.Component {
 
           {false &&
           <div>
-            <button onClick={() => this.test((style.cross))}>cross</button>
-            <button onClick={() => this.test((style.cross + " " + style.rotate45))}>pluss</button>
-            <button onClick={() => this.test((" "))}>arrow down</button>
-            <button onClick={() => this.test((style.rotate90))}>arrow side</button>
-            <button onClick={() => this.test((style.checkmark))}>checkbox</button>
-            <button onClick={() => this.test((style.checkmark + " " + style.empty))}>empty</button>
+            <button onClick={() => this.testCheckIconChange((style.cross))}>cross</button>
+            <button onClick={() => this.testCheckIconChange((style.cross + " " + style.rotate45))}>pluss</button>
+            <button onClick={() => this.testCheckIconChange((" "))}>arrow down</button>
+            <button onClick={() => this.testCheckIconChange((style.rotate90))}>arrow side</button>
+            <button onClick={() => this.testCheckIconChange((style.checkmark))}>checkbox</button>
+            <button onClick={() => this.testCheckIconChange((style.checkmark + " " + style.empty))}>empty</button>
           </div>
           }
 
