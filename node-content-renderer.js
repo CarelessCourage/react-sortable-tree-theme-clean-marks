@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './node-content-renderer.scss';
-import ModularIcon from './ModularIcon';
-//import {getNodeAtPath, addNodeUnderParent, removeNodeAtPath }  from 'react-sortable-tree';
 
 function isDescendant(older, younger) {
   return (
@@ -153,14 +151,6 @@ class FileThemeNodeContentRenderer extends Component {
                   }
                 >
                   <div className={styles.rowToolbar}>
-                  {!node.children && false && (
-                    <ModularIcon
-                      aria-label={node.expanded ? 'Collapse' : 'Expand'}
-                      expandedClass={styles.checkmark + " " + (node.checked ? " " : styles.empty)}
-                      //onClick={getNodeAtPath(node.path, treeData)}
-                      //onClick={console.log("lol: ", treeData)}
-                    />)}
-
                     {icons.map((icon, index) => (
                       <div
                         key={index} // eslint-disable-line react/no-array-index-key

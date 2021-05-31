@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import SortableTree from 'react-sortable-tree';
-import FileExplorerTheme from '../index';
+import customTheme from '../index';
 import ModularIcon from '../ModularIcon';
 import styles from '../node-content-renderer.scss';
-import Multiselect from 'react-widgets/lib/Multiselect'
-import '../react-widgets.css';
 
+//import { Multiselect } from 'react-widgets'
+
+//import ms from '../multiselect.scss'
+//import '../react-widgets.css';
 
 import './app.scss';
 class App extends Component {
@@ -67,14 +69,13 @@ class App extends Component {
           expandedClass={
             (!rowInfo.node.children ?
             styles.checkmark + " " + (rowInfo.node.checked ? " " : styles.empty) :
-            " lol") + " " +
+            " ") + " " +
             (!rowInfo.node.expanded && rowInfo.node.children ? styles.rotate90 : " ")
           }
           onClick={() => rowInfo.node.checked = !rowInfo.node.checked}
         />,
         ],
       buttons: [],
-      meta: rowInfo,
     }
   }
 
@@ -88,14 +89,9 @@ class App extends Component {
     return (
       <div>
         <h1>Topics</h1>
-        <Multiselect
-          data={['orange', 'red', 'blue', 'purple']}
-          defaultValue={["orange", "blue"]}
-          disabled={["red", "purple"]}
-        />
         <SortableTree
           isVirtualized={false}
-          theme={FileExplorerTheme}
+          theme={customTheme}
           treeData={treeData}
           onChange={this.updateTreeData}
           searchQuery={searchString}
